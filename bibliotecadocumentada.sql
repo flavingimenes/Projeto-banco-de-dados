@@ -20,6 +20,8 @@ CREATE TABLE `categorias` (
 -- Dados da tabela CATEGORIAS
 --
 
+
+--ANOTAÇÃO: Tipo de relação: Um para muito (1:N). Implementado com a chave estrangeira categoria_id na tabela livros, que referencia IdCategorias na tabela categorias.--
 INSERT INTO `categorias` VALUES 
 (1, 'Ficção'),
 (2, 'Tecnologia'),
@@ -32,6 +34,8 @@ INSERT INTO `categorias` VALUES
 -- Estrutura da tabela EMPRESTIMO
 --
 
+
+--ANOTAÇÃO: Muitos para um (N:1) para livros, membros, e funcionarios.
 DROP TABLE IF EXISTS `emprestimos`;
 CREATE TABLE `emprestimos` (
   `IdEmprestimos` int(11) NOT NULL AUTO_INCREMENT,
@@ -56,6 +60,8 @@ CREATE TABLE `emprestimos` (
 -- Estrutura da tabela FUNCIONARISO
 --
 
+
+--ANOTAÇÃO: Relacionamentos: Um para muitos (1:N) com 'emprestimos':Um funcionário pode gerenciar vários empréstimos.--
 DROP TABLE IF EXISTS `funcionarios`;
 CREATE TABLE `funcionarios` (
   `IdFuncionarios` int(11) NOT NULL AUTO_INCREMENT,
@@ -71,6 +77,8 @@ CREATE TABLE `funcionarios` (
 -- Estrutura da tabela LIVROS
 --
 
+
+--ANOTAÇÃO: Relacionamentos: Muitos para um (N:1) com 'categorias':Cada livro pertence a uma categoria específica. E Um para muitos (1:N) com 'emprestimos': Um livro pode estar associado a vários empréstimos.--
 DROP TABLE IF EXISTS `livros`;
 CREATE TABLE `livros` (
   `IdLivros` int(11) NOT NULL AUTO_INCREMENT,
@@ -116,6 +124,7 @@ UNLOCK TABLES;
 -- Estrutura da tabela MEMBROS
 --
 
+--ANOTAÇÃO: Relacionamento: Um para muitos (1:N) com 'emprestimos','reservas' e 'multas': Um membro pode realizar vários empréstimos, reservas e multas.--
 DROP TABLE IF EXISTS `membros`;
 CREATE TABLE `membros` (
   `IdMembros` int(11) NOT NULL AUTO_INCREMENT,
@@ -132,6 +141,7 @@ CREATE TABLE `membros` (
 -- Estrutura da tabela MULTAS
 --
 
+--ANOTAÇÃO: Tipo de relação: Muitos para um (N:1), Uma multa está associada a um único empréstimo e a um único membro. Um membro pode ter várias multas, assim como um empréstimo pode gerar uma multa.--
 DROP TABLE IF EXISTS `multas`;
 CREATE TABLE `multas` (
   `IdMultas` int(11) NOT NULL AUTO_INCREMENT,
@@ -151,6 +161,7 @@ CREATE TABLE `multas` (
 -- Estrutura da tabela RESERVAS
 --
 
+--ANOTAÇÃO: Tipo de relação: Muitos para muitos (N:N). Um membro pode fazer várias reservas, cada uma para um livro diferente. Um livro pode ser reservado por vários membros--
 DROP TABLE IF EXISTS `reservas`;
 CREATE TABLE `reservas` (
   `IdReservas` int(11) NOT NULL AUTO_INCREMENT,
